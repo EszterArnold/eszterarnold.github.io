@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C1 felkészítő egyénileg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+--plum: #3a2a6a;
+--violet: #6a4fc0;
+--beige: #f3ece1;
+--paper: #fffdf9;
+--ink: #241c3a;
+--line: #dfd4c3;
+--display: "Bricolage Grotesque", Georgia, serif;
+--body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.6; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; color: var(--plum); }
+h1 { font-size: clamp(2.1rem, 5.5vw, 3.6rem); font-weight: 700; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 500; }
+p { margin: 0; }
+a { color: var(--violet); }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+section { padding: 64px 0; }
+.btn { display: inline-block; background: var(--violet); color: #fff; text-decoration: none; font-weight: 600; padding: 14px 26px; border-radius: 10px; border: 2px solid var(--violet); }
+.btn:hover { background: var(--plum); border-color: var(--plum); }
+.btn:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--plum); outline-offset: 3px; }
+.btn.ghost { background: transparent; color: var(--plum); border-color: var(--plum); }
+.btn.ghost:hover { background: var(--plum); color: #fff; }
+header { padding: 18px 0; border-bottom: 1px solid var(--line); }
+header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.brand { font-family: var(--display); font-weight: 700; color: var(--plum); font-size: 1.15rem; text-decoration: none; }
+nav { display: flex; gap: 20px; font-size: 0.95rem; flex-wrap: wrap; }
+nav a { color: var(--ink); text-decoration: none; }
+nav a:hover { color: var(--violet); }
+.hero { background: var(--beige); padding: 56px 0 64px; }
+.hero .wrap { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+.hero p.lead { margin-top: 18px; max-width: 52ch; font-size: 1.15rem; }
+.hero .actions { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+.price-card { background: var(--paper); border: 2px solid var(--plum); border-radius: 16px; padding: 26px; }
+.price-card .label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--violet); font-weight: 600; }
+.price-card .price { font-family: var(--display); font-size: 3rem; font-weight: 700; color: var(--plum); line-height: 1.1; margin-top: 6px; }
+.price-card .price small { font-size: 1.05rem; font-weight: 500; color: var(--ink); }
+.price-card ul { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 1rem; }
+.price-card li::before { content: "\2713"; color: var(--violet); font-weight: 700; margin-right: 10px; }
+.sub { margin-top: 10px; max-width: 60ch; }
+.steps { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; counter-reset: step; list-style: none; padding: 0; }
+.steps li { counter-increment: step; border-top: 3px solid var(--violet); padding-top: 14px; }
+.steps li::before { content: counter(step); font-family: var(--display); font-size: 1.6rem; font-weight: 700; color: var(--violet); display: block; }
+.steps p { margin-top: 6px; font-size: 1rem; }
+.icon { width: 40px; height: 40px; color: var(--violet); display: block; margin-bottom: 10px; }
+.icon text { font-family: var(--display); }
+.parts { background: var(--beige); }
+.parts-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; }
+.part { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; font-size: 0.98rem; }
+.part h3 { margin-bottom: 6px; }
+.reviews-grid { margin-top: 30px; columns: 2; column-gap: 24px; }
+figure.review { break-inside: avoid; margin: 0 0 24px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
+figure.review.feature { background: var(--beige); border-color: var(--plum); }
+figure.review blockquote { margin: 0; font-size: 1rem; }
+figure.review figcaption { margin-top: 14px; font-size: 0.92rem; font-weight: 600; color: var(--plum); }
+figure.review figcaption span { font-weight: 400; color: var(--ink); }
+.about { background: var(--plum); color: #f4efe6; }
+.about h2 { color: #fff; }
+.about .wrap { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; align-items: start; }
+.about p + p { margin-top: 14px; }
+.headshot { display: block; width: 100%; max-width: 280px; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 16px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.25); }
+.facts { margin: 0 0 26px; display: flex; flex-wrap: wrap; gap: 16px 40px; }
+.facts div { border-top: 1px solid rgba(255, 255, 255, 0.35); padding-top: 10px; }
+.facts dt { font-family: var(--display); font-size: 1.5rem; font-weight: 700; color: #fff; line-height: 1.2; white-space: nowrap; }
+.facts dd { margin: 0; font-size: 0.92rem; }
+details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; color: var(--plum); }
+details p { margin-top: 10px; max-width: 65ch; }
+.final { background: var(--beige); text-align: left; }
+.final .actions { margin-top: 22px; display: flex; gap: 14px; flex-wrap: wrap; }
+.offer { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+footer { padding: 28px 0 40px; font-size: 0.88rem; opacity: 0.85; }
+@media (max-width: 820px) {
+.hero .wrap, .about .wrap, .offer { grid-template-columns: 1fr; }
+.steps { grid-template-columns: 1fr; }
+.parts-grid { grid-template-columns: 1fr 1fr; }
+.reviews-grid { columns: 1; }
+section { padding: 48px 0; }
+}
+@media (max-width: 480px) { .parts-grid { grid-template-columns: 1fr; } body { font-size: 17px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<a class="brand" href="#">C1 felkészítő</a>
+<nav aria-label="Oldal menü">
+<a href="#menete">Hogyan zajlik</a>
+<a href="#velemenyek">Vélemények</a>
+<a href="#eszter">Eszterről</a>
+<a href="#gyik">Gyakori kérdések</a>
+<a href="#foglalas">Ár és foglalás</a>
+</nav>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="wrap">
+<div>
+<h1>Felsőfokú angol vizsga (C1) felkészítés egyénileg, online</h1>
+<p class="lead">Személyre szabott órák a Cambridge C1 Advanced vizsgára. Az órákon a vizsga feladattípusaival, a gyakori hibákkal és az időbeosztással dolgozunk, a te szintedhez és határidődhöz igazítva.</p>
+<div class="actions">
+<a class="btn" href="#menete">Nézd meg, hogyan dolgozom</a>
+<a class="btn ghost" href="#velemenyek">Mit mondanak a tanulóim?</a>
+</div>
+</div>
+<aside class="price-card" aria-label="Neked szól, ha">
+<div class="label">Neked szól, ha</div>
+<ul>
+<li>a nyelvtudásod megvan, de a vizsga-rutin hiányzik</li>
+<li>közeledik a vizsgaidőpontod, és nem tudod, mivel kezdj</li>
+<li>a Writing vagy a Speaking részen elakadsz</li>
+<li>gyorsan és hatékonyan szeretnél felkészülni a vizsgára</li>
+</ul>
+</aside>
+</div>
+</section>
+<section id="menete">
+<div class="wrap">
+<h2>Hogyan zajlik a felkészülés?</h2>
+<p class="sub">Három lépés, akkor is, ha már csak néhány heted van a vizsgáig.</p>
+<ol class="steps">
+<li>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg><h3>Ingyenes megbeszélés</h3>
+<p>30 perc alatt megnézzük, hol tartasz, mi a vizsgaidőpontod, és mely részekkel van a legtöbb bajod. Azt is kiderítjük, hogy tudunk-e együtt dolgozni.</p>
+</li>
+<li>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v2.5H9z"/><path d="m9 13 2 2 4-4"/></svg><h3>Személyes terv</h3>
+<p>A hiányosságokra építünk tervet. Nem tanuljuk újra azt, amit már tudsz.</p>
+</li>
+<li>
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg><h3>Heti órák és házi feladat</h3>
+<p>Hetente egy vagy több alkalommal gyakoroljuk a feladattípusokat, a csapdákat, az időkezelést és a beszédrészt. Házi feladatot is kapsz, a munkádra pedig folyamatos visszajelzést.</p>
+</li>
+</ol>
+</div>
+</section>
+<section class="parts">
+<div class="wrap">
+<h2>A vizsga mind az öt részére</h2>
+<div class="parts-grid">
+<div class="part"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2z"/><path d="M22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg><h3>Reading</h3><p>Szövegértési feladattípusok, csapdák és időbeosztás.</p></div>
+<div class="part"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><text x="1.5" y="18" font-size="15" font-weight="700" fill="currentColor" stroke="none">Aa</text></svg><h3>Use of English</h3><p>Szókincs, nyelvtani szerkezetek és szövegkiegészítő feladatok.</p></div>
+<div class="part"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><h3>Writing</h3><p>Az egyes szövegtípusok elvárásai és a pontozás logikája.</p></div>
+<div class="part"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z"/><path d="M3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/></svg><h3>Listening</h3><p>Figyelemvezetés és a leggyakoribb csapdák.</p></div>
+<div class="part"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><h3>Speaking</h3><p>Beszédgyakorlat, időbeosztás, tippek és trükkök, hogy magabiztosan szólalj meg.</p></div>
+</div>
+</div>
+</section>
+<section id="velemenyek">
+<div class="wrap">
+<h2>Amit a tanulóim írtak a közös munkánkról</h2>
+<div class="reviews-grid">
+<figure class="review feature">
+<blockquote>Eszter az utolsó pillanatban került be az angol Cambridge CAE nyelvvizsga-felkészülésünkbe, amikor már pánikban volt az egész család. Az előző, más fórumról szerzett tanárok elérhetetlenek voltak és látszott, hogy bár a nyelvtudás megvan, a specifikus infók és rutin nagyon hiányoznak. Kiváló pedagógiai érzékkel és hatalmas rutinnal, teljes higgadtsággal vezetett végig az elképesztő rövid idő alatt a nyelvvizsga kulcsfontosságú elemein. Külön gyakoroltatta a gyengébb részeket, miután gyorsan felmérte, hogy mik a hiányosságok. Mindehhez még egy nagyon pozitív és nyugodt hozzáállást is biztosított, elmúlt a pánik. Rugalmas volt az óraszervezésben, időpontadásban és hatékonyan, gyorsan kommunikált. Sajnáljuk, hogy korábban nem találtunk rá. A folyamatos nyelvtanuláshoz vagy nyelvvizsgafelkészüléshez is nagyon ajánljuk az óráit! Még egyszer nagyon köszönjük!</blockquote>
+<figcaption>Mónika <span>· C1 felkészítés</span></figcaption>
+</figure>
+<figure class="review feature">
+<blockquote lang="en">Truly, Eszter is one of the best teachers I have ever met. She had a well-structured plan to help me achieve my goals, while keeping it all flexible. She never made me feel like I wasn’t capable, and she was always patient with me. Learning with Eszter was actually fun, she encouraged me a lot throughout my journey. Thanks to her I passed the CAE with flying colors! I think I couldn't have chosen anyone better. :)</blockquote>
+<figcaption>Gréta <span>· C1 vizsga letéve</span></figcaption>
+</figure>
+<figure class="review">
+<blockquote>Eszter csodálatos és rettentően segítőkész tanár. Egy elég extrém kívánsággal fordultam hozzá, ami az volt hogy 3 nap alatt kellett intenzíven felkészülni és átnézni az iTolc vizsga követelményeit. Viszont a felkészülés sikeresen zárult, meglett a C1 vizsgám és őszintén is nem lehetnék boldogabb. Aki egy lelkiismeretes, ítélkezés mentes, kedves, hatékony tanárra vágyik annak mindenképpen Esztert ajánlom!!</blockquote>
+<figcaption>Rozália <span>· C1 vizsga 3 nap felkészüléssel</span></figcaption>
+</figure>
+<figure class="review">
+<blockquote lang="en"><strong>Speaking English felt impossible, until Eszter.</strong> Choosing the right teacher changes everything. With Eszter, English has become practical, usable knowledge for me. I had always studied English and worked with several teachers, yet I never reached the point where I could actually speak. With Eszter, that completely changed. I started using the language in real life. I’m not perfect yet, but I listen to podcasts in English, read books in English, have foreign friends, and it’s no longer stressful if I get lost abroad or have to take a phone call in English at work. Thank you very much!</blockquote>
+<figcaption>Fruzsina</figcaption>
+</figure>
+<figure class="review">
+<blockquote lang="en">She is an excellent, well prepared teacher. Before I started studying with her, I hardly dared to speak in English. In a very short time, she managed to break through this barrier in me. Thanks to her, I was able to complete a job interview in English.</blockquote>
+<figcaption>Renáta</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section class="about" id="eszter">
+<div class="wrap">
+<div class="about-id">
+<img class="headshot" src="headshot.jpg" alt="Arnold Eszter portréja" width="300" height="300">
+<h2>Arnold Eszter</h2>
+</div>
+<div>
+<dl class="facts">
+<div><dt>10+</dt><dd>év tapasztalat</dd></div>
+<div><dt>TESOL tanúsítvány</dt><dd>Arizona State University</dd></div>
+</dl>
+<p>Magyar vagyok, 12 éve költöztem Spanyolországba, a férjem pedig amerikai, így nálunk otthon magyar, angol és spanyol keveredik: igazi nyelvi kavalkád. Naponta tapasztalom, milyen a nyelvek között ugrálni, ezért jól értem, mivel küzdenek a tanulóim.</p>
+<p>2016-ban kezdtem tanítani angolul. Dolgozom tinédzserekkel, felnőttekkel és szakemberekkel is: vizsgafelkészítésen, állásinterjú-felkészítésen, üzleti és mindennapi angolon.</p>
+<p>A Cambridge-vizsgák a specialitásom, ezen belül a legkeresettebb a C1, amire már több száz tanulót készítettem fel. TOEFL, Pearson és Linguaskill vizsgára is felkészítek.</p>
+<p>Az óráimon nyugodt, támogató légkört teremtek, és minden órát a te céljaidhoz igazítok, hogy magabiztosabb legyél, és lásd az eredményt.</p>
+</div>
+</div>
+</section>
+<section id="gyik">
+<div class="wrap">
+<h2>Gyakori kérdések</h2>
+<div style="margin-top: 20px;">
+<details>
+<summary>Milyen szintről érdemes belevágni?</summary>
+<p>Ha a nyelvtudásod nagyjából megvan a vizsgához, de hiányzik a vizsga-rutin és a feladattípusok ismerete, jó helyen jársz. Az ingyenes megbeszélésen megnézzük, hol tartasz.</p>
+</details>
+<details>
+<summary>Mi történik az ingyenes megbeszélésen?</summary>
+<p>30 percben beszélgetünk a céljaidról és a vizsgaidőpontodról, felmérjük a szintedet, és megnézzük azt is, hogy tudunk-e együtt dolgozni.</p>
+</details>
+<details>
+<summary>Csak C1-re készítesz fel?</summary>
+<p>A C1 a fő területem, de más angol nyelvvizsgákra és állásinterjú-felkészítésre is lehet hozzám jelentkezni. Írj, és megbeszéljük.</p>
+</details>
+</div>
+</div>
+</section>
+<section class="final" id="foglalas">
+<div class="wrap">
+<h2>Ár és ingyenes megbeszélés</h2>
+<div class="offer">
+<div class="price-card">
+<div class="label">Egyéni óra</div>
+<div class="price">30 EUR <small>/ 50 perc</small></div>
+<ul>
+<li>Online, egyéni, a te tempódban</li>
+<li>Rugalmas időpontok</li>
+<li>Vizsgafeladatok és visszajelzés minden órán</li>
+</ul>
+</div>
+<div>
+<p>Az első alkalom egy ingyenes, 30 perces megbeszélés: felmérjük a szintedet, megbeszéljük a céljaidat és a vizsgaidőpontodat, és megnézzük, hogy tudunk-e együtt dolgozni.</p>
+<div class="actions">
+<a class="btn" href="https://calendly.com/eszter-arnold/english-class-50-mins" target="_top">Ingyenes 30 perces megbeszélés foglalása</a>
+<a class="btn ghost" href="https://www.instagram.com/felsofok_ketpercben/" target="_top">Instagram</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="wrap">Független felkészítés, nem áll kapcsolatban a Cambridge University Press &amp; Assessmenttel.</div>
+</footer>
+</body>
+</html>
